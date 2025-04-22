@@ -1,0 +1,5 @@
+node_modules
+dist
+.env
+frontend/dist
+backend/prisma/dev.db

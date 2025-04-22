@@ -1,20 +1,12 @@
-import { useEffect } from 'react';
 import Map from '../components/Map';
-import { useFreelancers } from '../hooks/useFreelancers';
-import { LatLngTuple } from 'leaflet';
 
-const Home: React.FC = () => {
-  const { freelancers, loading, error } = useFreelancers();
-  const center: LatLngTuple = [51.505, -0.09]; // Default center (London)
+   const Home: React.FC = () => {
+     return (
+       <div className="container mx-auto p-4">
+         <h1 className="text-2xl font-bold mb-4">GigMap</h1>
+         <Map />
+       </div>
+     );
+   };
 
-  if (loading) return <img src="/loading-spinner.gif" alt="Loading" className="mx-auto mt-20" />;
-  if (error) return <div className="text-center mt-20"><img src="/error-icon.png" alt="Error" className="mx-auto" /><p>Error loading freelancers</p></div>;
-
-  return (
-    <div className="bg-[url('/hero-bg.jpg')] bg-cover bg-center">
-      <Map freelancers={freelancers} center={center} />
-    </div>
-  );
-};
-
-export default Home;
+   export default Home;

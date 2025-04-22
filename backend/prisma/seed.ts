@@ -14,6 +14,15 @@ async function main() {
         latitude: 51.505,
         longitude: -0.09,
       },
+      {
+        name: 'Jane Smith',
+        blurb: 'UI/UX Designer',
+        bestThings: ['Figma', 'Sketch', 'Prototyping'],
+        location: 'New York',
+        contact: 'jane@example.com',
+        latitude: 40.7128,
+        longitude: -74.0060,
+      },
     ],
   });
   console.log('Seeded database');

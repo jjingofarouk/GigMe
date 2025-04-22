@@ -1,6 +1,4 @@
-I'll expand your database with 150 freelancers from various countries and fields, ensuring representation from all regions (Americas, Europe, Africa, Asia, Oceania) and diverse professions (tech, medicine, education, creative arts, etc.). Here's the enriched version:
 
-```typescript
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -1305,15 +1303,6 @@ async function main() {
         contact: 'natalia.sokolova@example.com',
         latitude: 57.1859,
         longitude: 39.4145,
-      },
-      {
-        name: 'Mehdi Rahim',
-        blurb: 'Persian calligrapher',
-        bestThings: ['Nasta'liq Script', 'Modern Adaptations', 'Workshops'],
-        location: 'Tehran, Iran',
-        contact: 'mehdi.rahim@example.com',
-        latitude: 35.6892,
-        longitude: 51.389,
       },
       {
         name: 'Olga Mikhailovna',

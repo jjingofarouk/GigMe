@@ -1,14 +1,30 @@
-const BASE_URL = import.meta.env.VITE_API_URL || 'https://obscure-space-capybara-5g4jpq56rqww3vw77-3001.app.github.dev/';
+import axios from 'axios';
 
-export const getFreelancers = () =>
-  fetch(`${BASE_URL}/freelancers`).then((res) => res.json());
+   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-export const getFreelancer = (id: string) =>
-  fetch(`${BASE_URL}/freelancers/${id}`).then((res) => res.json());
+   const api = axios.create({
+     baseURL: API_URL,
+   });
 
-export const createFreelancer = (data: any) =>
-  fetch(`${BASE_URL}/freelancers`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  }).then((res) => res.json());
+   export const getFreelancers = async () => {
+     const response = await api.get('/freelancers');
+     return response.data;
+   };
+
+   export const getFreelancerById = async (id: string) => {
+     const response = await api.get(`/freelancers/${id}`);
+     return response.data;
+   };
+
+   export const createFreelancer = async (data: {
+     name: string;
+     blurb: string;
+     bestThings: string[];
+     location: string;
+     contact: string;
+     latitude: number;
+     longitude: number;
+   }) => {
+     const response = await api.post('/freelancers', data);
+     return response.data;
+   };

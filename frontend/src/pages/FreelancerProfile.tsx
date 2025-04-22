@@ -1,33 +1,37 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getFreelancer } from '../services/api';
-import Profile from '../components/Profile';
-import { Freelancer } from '../types';
+   import { useParams } from 'react-router-dom';
+   import { getFreelancerById } from '../services/api';
 
-const FreelancerProfile: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [freelancer, setFreelancer] = useState<Freelancer | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+   const FreelancerProfile: React.FC = () => {
+     const { id } = useParams<{ id: string }>();
+     const [freelancer, setFreelancer] = useState<any>(null);
+     const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetchFreelancer = async () => {
-      try {
-        const data = await getFreelancer(id!);
-        setFreelancer(data);
-      } catch (err) {
-        setError('Failed to load freelancer');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchFreelancer();
-  }, [id]);
+     useEffect(() => {
+       const fetchFreelancer = async () => {
+         try {
+           const data = await getFreelancerById(id!);
+           setFreelancer(data);
+         } catch (err: any) {
+           setError(err.response?.data?.error || 'Failed to load freelancer');
+         }
+       };
+       fetchFreelancer();
+     }, [id]);
 
-  if (loading) return <img src="/loading-spinner.gif" alt="Loading" className="mx-auto mt-20" />;
-  if (error || !freelancer) return <div className="text-center mt-20"><img src="/error-icon.png" alt="Error" className="mx-auto" /><p>{error || 'Freelancer not found'}</p></div>;
+     if (error) return <div className="text-red-500">{error}</div>;
+     if (!freelancer) return <div>Loading...</div>;
 
-  return <Profile freelancer={freelancer} />;
-};
+     return (
+       <div className="container mx-auto p-4">
+         <h1 className="text-2xl font-bold">{freelancer.name}</h1>
+         <p>{freelancer.blurb}</p>
+         <p><strong>Location:</strong> {freelancer.location}</p>
+         <p><strong>Contact:</strong> {freelancer.contact}</p>
+         <p><strong>Skills:</strong> {freelancer.bestThings.join(', ')}</p>
+         <p><strong>Coordinates:</strong> {freelancer.latitude}, {freelancer.longitude}</p>
+       </div>
+     );
+   };
 
-export default FreelancerProfile;
+   export default FreelancerProfile;

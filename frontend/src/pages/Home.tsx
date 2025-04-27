@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import { getFreelancers } from '../services/api';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import Button from '../components/Button';
 import './Home.css';
 
 interface Freelancer {

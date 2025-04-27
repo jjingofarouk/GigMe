@@ -4,8 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import { getFreelancers } from '../services/api';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Button from '../components/Button';
 import './Home.css'; // Import the new CSS file we'll create
 
@@ -68,7 +66,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="app-container">
-      <Header />
+      
       
       <main className="main-content">
         {/* Hero Section */}
@@ -221,7 +219,7 @@ const Home: React.FC = () => {
         </div>
       </main>
       
-      <Footer />
+      
     </div>
   );
 };

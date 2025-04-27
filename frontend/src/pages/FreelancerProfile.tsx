@@ -1,9 +1,10 @@
+// src/components/FreelancerProfile.tsx
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getFreelancerById } from '../services/api';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
-import Button from '../components/Button';
+import Button from './Button';
 import './FreelancerProfile.css';
 
 interface Freelancer {
@@ -40,10 +41,11 @@ const FreelancerProfile: React.FC = () => {
     fetchFreelancer();
   }, [id]);
 
-  const markerIcon = new L.Icon({
-    iconUrl: '/map-marker.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
+  const markerIcon = L.divIcon({
+    html: '<span style="font-size: 24px; color: red;">🔴</span>',
+    className: '',
+    iconSize: [24, 24],
+    iconAnchor: [12, 24],
   });
 
   if (loading) {
@@ -97,7 +99,8 @@ const FreelancerProfile: React.FC = () => {
           <div className="freelancer-profile__info-main">
             <h1 className="freelancer-profile__name">{freelancer.name}</h1>
             <p className="freelancer-profile__location">
-              <span className="freelancer-profile__location-label">Location:</span> {freelancer.location}
+              <span className="freelancer-profile__location-label">Location:</span>{' '}
+              {freelancer.location}
             </p>
           </div>
 
@@ -144,7 +147,9 @@ const FreelancerProfile: React.FC = () => {
                 <h2 className="freelancer-profile__section-title">Skills & Expertise</h2>
                 <div className="freelancer-profile__skills">
                   {freelancer.bestThings.map((thing, index) => (
-                    <span key={index} className="freelancer-profile__skill">{thing}</span>
+                    <span key={index} className="freelancer-profile__skill">
+                      {thing}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -195,7 +200,9 @@ const FreelancerProfile: React.FC = () => {
           <div className="freelancer-profile__portfolio">
             <div className="freelancer-profile__empty-state">
               <h3 className="freelancer-profile__empty-title">No portfolio items yet</h3>
-              <p className="freelancer-profile__empty-text">This freelancer hasn't added any portfolio items.</p>
+              <p className="freelancer-profile__empty-text">
+                This freelancer hasn't added any portfolio items.
+              </p>
             </div>
           </div>
         )}
@@ -204,7 +211,9 @@ const FreelancerProfile: React.FC = () => {
           <div className="freelancer-profile__reviews">
             <div className="freelancer-profile__empty-state">
               <h3 className="freelancer-profile__empty-title">No reviews yet</h3>
-              <p className="freelancer-profile__empty-text">This freelancer hasn't received any reviews yet.</p>
+              <p className="freelancer-profile__empty-text">
+                This freelancer hasn't received any reviews yet.
+              </p>
             </div>
           </div>
         )}

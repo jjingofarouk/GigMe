@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getFreelancerById } from '../services/api';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
-import Button from './Button';
+import Button from '../components/Button';
 import './FreelancerProfile.css';
 
 interface Freelancer {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createFreelancer } from '../services/api';
 import Button from '../components/Button'; // Default import is correct
+import './CreatePin.css'; // Import the external CSS
 
 const CreatePin: React.FC = () => {
   const navigate = useNavigate();
@@ -58,103 +59,90 @@ const CreatePin: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-12 px-4">
-      <div className="text-center mb-10">
-        <h1 className="text-3xl font-bold text-gray-900">Create Your Freelancer Profile</h1>
-        <p className="mt-2 text-gray-600">
-          Let clients find you on the map and connect with your services
-        </p>
+    <div className="create-pin-container">
+      <div className="create-pin-header">
+        <h1>Create Your Freelancer Profile</h1>
+        <p>Let clients find you on the map and connect with your services</p>
       </div>
 
       {/* Progress Bar */}
-      <div className="mb-10">
-        <div className="flex justify-between mb-2">
+      <div className="progress-bar">
+        <div className="progress-steps">
           {Array.from({ length: totalSteps }).map((_, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <div key={index} className="progress-step">
               <div
-                className={`w-8 h-8 flex items-center justify-center rounded-full font-medium ${
+                className={`step-indicator ${
                   currentStep > index + 1
-                    ? 'bg-indigo-600 text-white'
+                    ? 'completed'
                     : currentStep === index + 1
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-gray-200 text-gray-700'
+                    ? 'active'
+                    : 'inactive'
                 }`}
               >
                 {index + 1}
               </div>
-              <span className="text-xs mt-1 text-gray-500">
+              <span className="step-label">
                 {index === 0 ? 'Basic Info' : index === 1 ? 'Skills' : 'Location'}
               </span>
             </div>
           ))}
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2.5">
+        <div className="progress-bar-track">
           <div
-            className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300"
+            className="progress-bar-fill"
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
           ></div>
         </div>
       </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
-          {error}
-        </div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-8">
+      <form onSubmit={handleSubmit} className="create-pin-form">
         {/* Step 1: Basic Information */}
         {currentStep === 1 && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">Basic Information</h2>
+          <div className="form-section">
+            <h2>Basic Information</h2>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <div className="form-group">
+              <label>Full Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="John Doe"
                 required
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Short Bio</label>
+            <div className="form-group">
+              <label>Short Bio</label>
               <textarea
                 name="blurb"
                 value={formData.blurb}
                 onChange={handleChange}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Describe yourself and your services in a few sentences"
                 required
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Contact Information
-              </label>
+            <div className="form-group">
+              <label>Contact Information</label>
               <input
                 type="text"
                 name="contact"
                 value={formData.contact}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Email or phone number"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">
-                This will be visible to users who view your profile
-              </p>
+              <p>This will be visible to users who view your profile</p>
             </div>
 
-            <div className="pt-4 flex justify-end">
-              <Button onClick={nextStep}>
-                Continue <span className="ml-2 font-bold">→</span>
+            <div className="button-container">
+              <Button className="create-pin-button" onClick={nextStep}>
+                Continue <span className="button-icon">→</span>
               </Button>
             </div>
           </div>
@@ -162,20 +150,17 @@ const CreatePin: React.FC = () => {
 
         {/* Step 2: Skills */}
         {currentStep === 2 && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">Your Top Skills</h2>
+          <div className="form-section">
+            <h2>Your Top Skills</h2>
 
-            <div className="space-y-4">
+            <div className="form-group">
               {formData.bestThings.map((thing, index) => (
-                <div key={index}>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Skill {index + 1}
-                  </label>
+                <div key={index} className="form-group">
+                  <label>Skill {index + 1}</label>
                   <input
                     type="text"
                     value={thing}
                     onChange={(e) => handleChange(e, index)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     placeholder={`e.g. ${
                       index === 0
                         ? 'Web Design'
@@ -189,12 +174,12 @@ const CreatePin: React.FC = () => {
               ))}
             </div>
 
-            <div className="pt-4 flex justify-between">
-              <Button variant="outline" onClick={prevStep}>
-                <span className="mr-2 font-bold">←</span> Back
+            <div className="button-container">
+              <Button className="back-button" variant="outline" onClick={prevStep}>
+                <span className="button-icon">←</span> Back
               </Button>
-              <Button onClick={nextStep}>
-                Continue <span className="ml-2 font-bold">→</span>
+              <Button className="create-pin-button" onClick={nextStep}>
+                Continue <span className="button-icon">→</span>
               </Button>
             </div>
           </div>
@@ -202,75 +187,72 @@ const CreatePin: React.FC = () => {
 
         {/* Step 3: Location */}
         {currentStep === 3 && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-6">Your Location</h2>
+          <div className="form-section">
+            <h2>Your Location</h2>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Location Name
-              </label>
+            <div className="form-group">
+              <label>Location Name</label>
               <input
                 type="text"
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="City, Country"
                 required
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Latitude</label>
+            <div className="coordinates-grid">
+              <div className="form-group">
+                <label>Latitude</label>
                 <input
                   type="number"
                   name="latitude"
                   value={formData.latitude}
                   onChange={handleChange}
                   step="any"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="e.g. 40.7128"
                   required
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Longitude</label>
+              <div className="form-group">
+                <label>Longitude</label>
                 <input
                   type="number"
                   name="longitude"
                   value={formData.longitude}
                   onChange={handleChange}
                   step="any"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="e.g. -74.0060"
                   required
                 />
               </div>
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <div className="text-sm text-indigo-600 mb-2 font-medium">
-                How to find your coordinates?
-              </div>
-              <p className="text-xs text-gray-500">
+            <div className="info-box">
+              <div className="info-title">How to find your coordinates?</div>
+              <p>
                 You can find your coordinates by right-clicking on your location in Google Maps and
                 selecting "What's here?". The coordinates will appear at the bottom of the screen.
               </p>
             </div>
 
-            <div className="pt-4 flex justify-between">
-              <Button variant="outline" onClick={prevStep}>
-                <span className="mr-2 font-bold">←</span> Back
+            <div className="button-container">
+              <Button className="back-button" variant="outline" onClick={prevStep}>
+                <span className="button-icon">←</span> Back
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button
+                className="create-pin-button"
+                type="submit"
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? (
                   <>
-                    <span className="mr-2 font-bold animate-pulse">...</span> Creating...
+                    <span className="loading-indicator animate-pulse">...</span> Creating...
                   </>
                 ) : (
                   <>
-                    Create Pin <span className="ml-2 font-bold">✓</span>
+                    Create Pin <span className="button-icon">✓</span>
                   </>
                 )}
               </Button>

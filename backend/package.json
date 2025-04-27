@@ -2,11 +2,10 @@
   "name": "gigmap-backend",
   "version": "0.1.0",
   "private": true,
-  "main": "dist/server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node api/index.js",
     "build": "prisma generate && tsc",
-    "dev": "ts-node src/server.ts",
+    "dev": "ts-node api/index.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "seed": "ts-node prisma/seed.ts",

@@ -1,5 +1,5 @@
 // src/pages/About.tsx
-import '../styles/About.css';
+import './About.css';
 
 const About: React.FC = () => {
   return (

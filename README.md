@@ -316,9 +316,9 @@ GigMap is licensed under the **MIT License**. See the [LICENSE](LICENSE) file fo
 
 For inquiries, feedback, or collaboration opportunities, reach out via:
 
-- **Email**: support@gigmap.com
-- **Phone**: +1 (555) 123-4567
-- **Website**: [gigmap.vercel.app](https://gigmap.vercel.app)
+- **Email**: jjingofaroukk@gmail.com
+- **Phone**: +256 (751) 360-385
+- **Website**: [jjingofarouk.xyz](https://jjingofarouk.xyz)
 - **GitHub**: [jjingofarouk](https://github.com/jjingofarouk)
 
 Explore GigMap, review the code, and let’s build the future of freelance networking together!

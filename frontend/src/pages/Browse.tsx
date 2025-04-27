@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import { getFreelancers } from '../services/api';
 import Button from '../components/Button';
-import '../styles/Browse.css';
+import './Browse.css';
 
 interface Freelancer {
   id: string;

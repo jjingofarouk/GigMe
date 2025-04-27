@@ -3,7 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { getFreelancerById } from '../services/api';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
-import Button from '../components/Button'; // Default import is correct
+import Button from '../components/Button';
+import './FreelancerProfile.css';
 
 interface Freelancer {
   id: string;
@@ -47,19 +48,17 @@ const FreelancerProfile: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-indigo-600 font-medium animate-pulse">Loading...</div>
+      <div className="profile-loading">
+        <div className="profile-loading__text">Loading...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8 max-w-md">
-          <div className="bg-red-100 text-red-700 p-4 rounded-lg mb-6">
-            <p className="font-medium">{error}</p>
-          </div>
+      <div className="profile-error">
+        <div className="profile-error__container">
+          <div className="profile-error__message">{error}</div>
           <Link to="/">
             <Button>Return to Homepage</Button>
           </Link>
@@ -70,11 +69,9 @@ const FreelancerProfile: React.FC = () => {
 
   if (!freelancer) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center p-8 max-w-md">
-          <div className="bg-yellow-100 text-yellow-700 p-4 rounded-lg mb-6">
-            <p className="font-medium">Freelancer not found</p>
-          </div>
+      <div className="profile-not-found">
+        <div className="profile-not-found__container">
+          <div className="profile-not-found__message">Freelancer not found</div>
           <Link to="/">
             <Button>Return to Homepage</Button>
           </Link>
@@ -84,112 +81,77 @@ const FreelancerProfile: React.FC = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      {/* Header */}
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 h-48 md:h-60 relative">
-          <div className="absolute -bottom-16 left-8">
-            <div className="rounded-full border-4 border-white w-32 h-32 overflow-hidden bg-white">
-              <img
-                src="/profile-placeholder.jpg"
-                alt={freelancer.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+    <div className="freelancer-profile">
+      <div className="freelancer-profile__header">
+        <div className="freelancer-profile__cover">
+          <div className="freelancer-profile__avatar-container">
+            <img
+              src="/profile-placeholder.jpg"
+              alt={freelancer.name}
+              className="freelancer-profile__avatar"
+            />
           </div>
         </div>
 
-        <div className="pt-20 pb-6 px-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">{freelancer.name}</h1>
-              <p className="text-gray-600 mt-1">
-                <span className="font-medium bg-gray-200 px-2 py-0.5 rounded">Location:</span>{' '}
-                {freelancer.location}
-              </p>
-            </div>
-
-            <div className="mt-4 md:mt-0 flex space-x-3">
-              <a
-                href={`mailto:${freelancer.contact}`}
-                className="inline-flex items-center px-4 py-2 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition-colors"
-              >
-                Contact
-              </a>
-              <button className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                Save
-              </button>
-            </div>
+        <div className="freelancer-profile__info">
+          <div className="freelancer-profile__info-main">
+            <h1 className="freelancer-profile__name">{freelancer.name}</h1>
+            <p className="freelancer-profile__location">
+              <span className="freelancer-profile__location-label">Location:</span> {freelancer.location}
+            </p>
           </div>
 
-          {/* Tabs */}
-          <div className="mt-8 border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
-              <button
-                onClick={() => setActiveTab('about')}
-                className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'about'
-                    ? 'border-indigo-600 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                About
-              </button>
-              <button
-                onClick={() => setActiveTab('portfolio')}
-                className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'portfolio'
-                    ? 'border-indigo-600 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                Portfolio
-              </button>
-              <button
-                onClick={() => setActiveTab('reviews')}
-                className={`pb-4 px-1 border-b-2 font-medium text-sm ${
-                  activeTab === 'reviews'
-                    ? 'border-indigo-600 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                Reviews
-              </button>
-            </nav>
+          <div className="freelancer-profile__actions">
+            <a href={`mailto:${freelancer.contact}`} className="freelancer-profile__contact-button">
+              Contact
+            </a>
+            <button className="freelancer-profile__save-button">Save</button>
           </div>
+        </div>
+
+        <div className="freelancer-profile__tabs">
+          <button
+            onClick={() => setActiveTab('about')}
+            className={`freelancer-profile__tab ${activeTab === 'about' ? 'freelancer-profile__tab--active' : ''}`}
+          >
+            About
+          </button>
+          <button
+            onClick={() => setActiveTab('portfolio')}
+            className={`freelancer-profile__tab ${activeTab === 'portfolio' ? 'freelancer-profile__tab--active' : ''}`}
+          >
+            Portfolio
+          </button>
+          <button
+            onClick={() => setActiveTab('reviews')}
+            className={`freelancer-profile__tab ${activeTab === 'reviews' ? 'freelancer-profile__tab--active' : ''}`}
+          >
+            Reviews
+          </button>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="mt-8">
+      <div className="freelancer-profile__content">
         {activeTab === 'about' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-8">
-              {/* Bio */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">About</h2>
-                <p className="text-gray-700">{freelancer.blurb}</p>
+          <div className="freelancer-profile__about">
+            <div className="freelancer-profile__main-content">
+              <div className="freelancer-profile__section">
+                <h2 className="freelancer-profile__section-title">About</h2>
+                <p className="freelancer-profile__section-text">{freelancer.blurb}</p>
               </div>
 
-              {/* Skills */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-                <div className="flex flex-wrap gap-2">
+              <div className="freelancer-profile__section">
+                <h2 className="freelancer-profile__section-title">Skills & Expertise</h2>
+                <div className="freelancer-profile__skills">
                   {freelancer.bestThings.map((thing, index) => (
-                    <span
-                      key={index}
-                      className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm"
-                    >
-                      {thing}
-                    </span>
+                    <span key={index} className="freelancer-profile__skill">{thing}</span>
                   ))}
                 </div>
               </div>
 
-              {/* Location */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-4">Location</h2>
-                <div className="h-64 rounded-lg overflow-hidden">
+              <div className="freelancer-profile__section">
+                <h2 className="freelancer-profile__section-title">Location</h2>
+                <div className="freelancer-profile__map">
                   <MapContainer
                     center={[freelancer.latitude, freelancer.longitude]}
                     zoom={13}
@@ -205,24 +167,23 @@ const FreelancerProfile: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              {/* Contact Info */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-4">Contact Information</h2>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Email/Phone</p>
-                    <p className="font-medium">{freelancer.contact}</p>
+            <div className="freelancer-profile__sidebar">
+              <div className="freelancer-profile__contact-info">
+                <h2 className="freelancer-profile__section-title">Contact Information</h2>
+                <div className="freelancer-profile__contact-details">
+                  <div className="freelancer-profile__contact-item">
+                    <p className="freelancer-profile__contact-label">Email/Phone</p>
+                    <p className="freelancer-profile__contact-value">{freelancer.contact}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Member Since</p>
-                    <p className="font-medium">
+                  <div className="freelancer-profile__contact-item">
+                    <p className="freelancer-profile__contact-label">Member Since</p>
+                    <p className="freelancer-profile__contact-value">
                       {new Date(freelancer.createdAt).toLocaleDateString()}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">Location</p>
-                    <p className="font-medium">{freelancer.location}</p>
+                  <div className="freelancer-profile__contact-item">
+                    <p className="freelancer-profile__contact-label">Location</p>
+                    <p className="freelancer-profile__contact-value">{freelancer.location}</p>
                   </div>
                 </div>
               </div>
@@ -231,19 +192,19 @@ const FreelancerProfile: React.FC = () => {
         )}
 
         {activeTab === 'portfolio' && (
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No portfolio items yet</h3>
-              <p className="text-gray-500">This freelancer hasn't added any portfolio items.</p>
+          <div className="freelancer-profile__portfolio">
+            <div className="freelancer-profile__empty-state">
+              <h3 className="freelancer-profile__empty-title">No portfolio items yet</h3>
+              <p className="freelancer-profile__empty-text">This freelancer hasn't added any portfolio items.</p>
             </div>
           </div>
         )}
 
         {activeTab === 'reviews' && (
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No reviews yet</h3>
-              <p className="text-gray-500">This freelancer hasn't received any reviews yet.</p>
+          <div className="freelancer-profile__reviews">
+            <div className="freelancer-profile__empty-state">
+              <h3 className="freelancer-profile__empty-title">No reviews yet</h3>
+              <p className="freelancer-profile__empty-text">This freelancer hasn't received any reviews yet.</p>
             </div>
           </div>
         )}

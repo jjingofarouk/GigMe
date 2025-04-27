@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { createFreelancer } from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import Button from './Button'; // Default import is correct
+import Button from './Button';
+import './PinForm.css';
 
 const PinForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -26,31 +27,28 @@ const PinForm: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-8 rounded-2xl shadow-lg max-w-lg mx-auto space-y-6"
-    >
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Name</label>
+    <form onSubmit={handleSubmit} className="pin-form">
+      <div className="pin-form__field">
+        <label className="pin-form__label">Name</label>
         <input
           type="text"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+          className="pin-form__input"
           required
         />
       </div>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Blurb</label>
+      <div className="pin-form__field">
+        <label className="pin-form__label">Blurb</label>
         <textarea
           value={formData.blurb}
           onChange={(e) => setFormData({ ...formData, blurb: e.target.value })}
-          className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors resize-none h-32"
+          className="pin-form__textarea"
           required
         />
       </div>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Best Things (3)</label>
+      <div className="pin-form__field">
+        <label className="pin-form__label">Best Things (3)</label>
         {formData.bestThings.map((thing, index) => (
           <input
             key={index}
@@ -61,53 +59,49 @@ const PinForm: React.FC = () => {
               newThings[index] = e.target.value;
               setFormData({ ...formData, bestThings: newThings });
             }}
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors mb-2"
+            className="pin-form__input pin-form__input--skill"
             required
           />
         ))}
       </div>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Location</label>
+      <div className="pin-form__field">
+        <label className="pin-form__label">Location</label>
         <input
           type="text"
           value={formData.location}
           onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-          className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+          className="pin-form__input"
           required
         />
       </div>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Contact</label>
+      <div className="pin-form__field">
+        <label className="pin-form__label">Contact</label>
         <input
           type="text"
           value={formData.contact}
           onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-          className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+          className="pin-form__input"
           required
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">Latitude</label>
+      <div className="pin-form__coords">
+        <div className="pin-form__field">
+          <label className="pin-form__label">Latitude</label>
           <input
             type="number"
             value={formData.latitude}
-            onChange={(e) =>
-              setFormData({ ...formData, latitude: parseFloat(e.target.value) })
-            }
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+            onChange={(e) => setFormData({ ...formData, latitude: parseFloat(e.target.value) })}
+            className="pin-form__input"
             required
           />
         </div>
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">Longitude</label>
+        <div className="pin-form__field">
+          <label className="pin-form__label">Longitude</label>
           <input
             type="number"
             value={formData.longitude}
-            onChange={(e) =>
-              setFormData({ ...formData, longitude: parseFloat(e.target.value) })
-            }
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors"
+            onChange={(e) => setFormData({ ...formData, longitude: parseFloat(e.target.value) })}
+            className="pin-form__input"
             required
           />
         </div>

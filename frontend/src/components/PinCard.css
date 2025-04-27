@@ -1,0 +1,23 @@
+/* styles/PinCard.css */
+:root { –color-primary: #8b5cf6; –color-primary-light: #a78bfa; –color-primary-dark: #7c3aed; –color-secondary: #d946ef; –color-secondary-light: #e879f9; –color-secondary-dark: #c026d3; –color-tertiary: #ec4899; –color-white: #ffffff; –color-gray-50: #f9fafb; –color-gray-100: #f3f4f6; –color-gray-200: #e5e7eb; –color-gray-500: #6b7280; –color-gray-600: #4b5563; –color-gray-800: #1f2937; –color-gray-900: #111827; –color-indigo-100: #e0e7ff; –color-indigo-600: #4f46e5; –color-indigo-800: #3730a3; –shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); –shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); –border-radius-lg: 0.5rem; –border-radius-full: 9999px; }
+.pin-card { background: var(–color-white); border-radius: var(–border-radius-lg); box-shadow: var(–shadow-md); border: 1px solid var(–color-gray-100); transition: box-shadow 0.2s ease; }
+.pin-card:hover { box-shadow: var(–shadow-lg); }
+.pin-card__container { padding: 1.25rem; }
+.pin-card__header { display: flex; justify-content: space-between; align-items: flex-start; }
+.pin-card__title { font-size: 1.125rem; font-weight: 700; color: var(–color-gray-900); }
+.pin-card__location { margin-top: 0.25rem; font-size: 0.875rem; color: var(–color-gray-500); }
+.pin-card__location-label { font-weight: 500; background: var(–color-gray-200); padding: 0.125rem 0.5rem; border-radius: var(–border-radius-lg); }
+.pin-card__date { background: var(–color-indigo-100); color: var(–color-indigo-800); font-size: 0.75rem; font-weight: 500; padding: 0.125rem 0.625rem; border-radius: var(–border-radius-full); }
+.pin-card__blurb { margin-top: 0.75rem; color: var(–color-gray-600); font-size: 0.875rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pin-card__skills { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.pin-card__skill { background: var(–color-gray-100); color: var(–color-gray-800); font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: var(–border-radius-lg); }
+.pin-card__footer { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(–color-gray-100); display: flex; justify-content: space-between; align-items: center; }
+.pin-card__contact { font-size: 0.875rem; color: var(–color-gray-500); }
+.pin-card__contact-label { font-weight: 500; background: var(–color-gray-200); padding: 0.125rem 0.5rem; border-radius: var(–border-radius-lg); }
+.pin-card__link { display: inline-flex; align-items: center; font-weight: 500; color: var(–color-primary); text-decoration: none; transition: color 0.2s ease; }
+.pin-card__link:hover { color: var(–color-primary-dark); }
+.pin-card__link-arrow { margin-left: 0.25rem; font-weight: 700; }
+
+
+
+

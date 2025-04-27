@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import './Home.css'; // Import the new CSS file we'll create
 
 // Define Freelancer type based on backend schema
 interface Freelancer {
@@ -66,27 +67,26 @@ const Home: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-indigo-50 to-purple-50">
+    <div className="app-container">
       <Header />
       
-      <main className="flex-grow">
+      <main className="main-content">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-5xl font-bold mb-6 drop-shadow-md">Find Skilled Freelancers Near You</h1>
-              <p className="text-xl mb-10 opacity-90">Connect with talented professionals in your area for your next project</p>
+        <div className="hero-section">
+          <div className="container">
+            <div className="hero-content">
+              <h1>Find Skilled Freelancers Near You</h1>
+              <p>Connect with talented professionals in your area for your next project</p>
               
-              <div className="relative">
+              <div className="search-container">
                 <input
                   type="text"
                   placeholder="Search by name, skill, or location..."
-                  className="w-full py-4 px-8 rounded-full text-gray-800 focus:outline-none focus:ring-4 focus:ring-pink-300 shadow-lg"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <button className="absolute right-3 top-3 bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white p-2 rounded-full hover:from-fuchsia-600 hover:to-pink-600 transition-all shadow-md">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button className="search-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </button>
@@ -96,15 +96,11 @@ const Home: React.FC = () => {
         </div>
         
         {/* Categories */}
-        <div className="container mx-auto px-4 py-12">
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="container">
+          <div className="categories-container">
             <button 
               onClick={() => setSelectedCategory('all')}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
-                selectedCategory === 'all' 
-                  ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white' 
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-              }`}
+              className={`category-button ${selectedCategory === 'all' ? 'active' : ''}`}
             >
               All
             </button>
@@ -112,11 +108,7 @@ const Home: React.FC = () => {
               <button 
                 key={index}
                 onClick={() => setSelectedCategory(skill)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
-                  selectedCategory === skill 
-                    ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white' 
-                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                }`}
+                className={`category-button ${selectedCategory === skill ? 'active' : ''}`}
               >
                 {skill}
               </button>
@@ -124,19 +116,19 @@ const Home: React.FC = () => {
           </div>
           
           {/* Map and Freelancers Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid-layout">
             {/* Map */}
-            <div className="lg:col-span-2 rounded-2xl overflow-hidden shadow-xl bg-white border border-purple-100">
+            <div className="map-container">
               {loading ? (
-                <div className="h-96 flex items-center justify-center bg-gray-50">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-fuchsia-600"></div>
+                <div className="loader-container">
+                  <div className="loader"></div>
                 </div>
               ) : (
                 <MapContainer 
                   center={[20, 0]} 
                   zoom={2} 
                   style={{ height: '500px', width: '100%' }}
-                  className="z-0"
+                  className="map"
                 >
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -149,13 +141,13 @@ const Home: React.FC = () => {
                       icon={markerIcon}
                     >
                       <Popup className="custom-popup">
-                        <div className="text-center">
-                          <h3 className="font-bold text-lg mb-1 text-fuchsia-700">{freelancer.name}</h3>
-                          <p className="text-sm mb-2 text-gray-600">{freelancer.location}</p>
-                          <p className="text-sm mb-3 line-clamp-2">{freelancer.blurb}</p>
+                        <div className="popup-content">
+                          <h3>{freelancer.name}</h3>
+                          <p className="location">{freelancer.location}</p>
+                          <p className="blurb">{freelancer.blurb}</p>
                           <Link 
                             to={`/freelancer/${freelancer.id}`}
-                            className="inline-block bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white px-4 py-1 rounded text-sm hover:from-violet-700 hover:to-fuchsia-700 transition-colors"
+                            className="view-profile-link"
                           >
                             View Profile
                           </Link>
@@ -168,38 +160,38 @@ const Home: React.FC = () => {
             </div>
             
             {/* Freelancers List */}
-            <div className="bg-white rounded-2xl shadow-xl p-6 border border-purple-100">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-fuchsia-900">Freelancers</h2>
-                <span className="bg-gradient-to-r from-violet-100 to-fuchsia-100 text-fuchsia-800 text-xs font-medium px-3 py-1 rounded-full">
+            <div className="freelancers-container">
+              <div className="freelancers-header">
+                <h2>Freelancers</h2>
+                <span className="freelancer-count">
                   {filteredFreelancers.length} found
                 </span>
               </div>
               
               {loading ? (
-                <div className="flex items-center justify-center py-12">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-fuchsia-600"></div>
+                <div className="loader-container">
+                  <div className="loader"></div>
                 </div>
               ) : filteredFreelancers.length === 0 ? (
-                <div className="text-center py-12 text-gray-500">
+                <div className="no-results">
                   No freelancers found matching your criteria
                 </div>
               ) : (
-                <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
+                <div className="freelancers-list">
                   {filteredFreelancers.slice(0, 6).map((freelancer) => (
-                    <div key={freelancer.id} className="p-5 border border-purple-100 rounded-xl hover:border-fuchsia-300 transition-all hover:shadow-md bg-gradient-to-br from-white to-purple-50">
-                      <h3 className="font-bold text-fuchsia-900">{freelancer.name}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{freelancer.location}</p>
-                      <p className="text-sm text-gray-700 mb-3 line-clamp-2">{freelancer.blurb}</p>
-                      <div className="flex flex-wrap gap-1 mb-3">
+                    <div key={freelancer.id} className="freelancer-card">
+                      <h3>{freelancer.name}</h3>
+                      <p className="location">{freelancer.location}</p>
+                      <p className="blurb">{freelancer.blurb}</p>
+                      <div className="skills-container">
                         {freelancer.bestThings.map((skill, index) => (
-                          <span key={index} className="bg-gradient-to-r from-violet-100 to-fuchsia-100 text-fuchsia-800 text-xs px-3 py-1 rounded-full">
+                          <span key={index} className="skill-tag">
                             {skill}
                           </span>
                         ))}
                       </div>
-                      <Link to={`/freelancer/${freelancer.id}`}>
-                        <Button className="w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white py-2 px-4 rounded-lg transition-all shadow-md">View Profile</Button>
+                      <Link to={`/freelancer/${freelancer.id}`} className="profile-link">
+                        <Button className="view-profile-button">View Profile</Button>
                       </Link>
                     </div>
                   ))}
@@ -207,8 +199,8 @@ const Home: React.FC = () => {
               )}
               
               {filteredFreelancers.length > 6 && (
-                <div className="mt-6 text-center">
-                  <Link to="/freelancers" className="text-fuchsia-600 hover:text-fuchsia-800 font-medium underline decoration-2 underline-offset-2 hover:decoration-fuchsia-400">
+                <div className="view-all-container">
+                  <Link to="/freelancers" className="view-all-link">
                     View all {filteredFreelancers.length} freelancers
                   </Link>
                 </div>
@@ -217,11 +209,11 @@ const Home: React.FC = () => {
           </div>
           
           {/* Call to Action */}
-          <div className="mt-16 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 rounded-2xl p-10 text-white text-center shadow-xl">
-            <h2 className="text-3xl font-bold mb-4">Are you a freelancer?</h2>
-            <p className="mb-8 text-lg opacity-90 max-w-lg mx-auto">Join our platform and let clients find you. Create your freelancer pin today!</p>
+          <div className="cta-container">
+            <h2>Are you a freelancer?</h2>
+            <p>Join our platform and let clients find you. Create your freelancer pin today!</p>
             <Link to="/create">
-              <button className="bg-white text-fuchsia-700 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl">
+              <button className="create-pin-button">
                 Create Your Pin
               </button>
             </Link>

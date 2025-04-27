@@ -31,5 +31,3 @@ export const createFreelancer = async (data: {
   return response.data;
 };
 
-
-The backend url I have for vercel is gigmap-backend.vercel.app

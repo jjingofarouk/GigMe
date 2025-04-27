@@ -1,5 +1,3 @@
-/* styles/Home.css */
-
 :root {
   --color-primary: #8b5cf6;
   --color-primary-light: #a78bfa;
@@ -33,7 +31,6 @@
   --border-radius-full: 9999px;
 }
 
-/* Layout */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -49,13 +46,20 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Hero Section */
 .hero-section {
   background: linear-gradient(to right, var(--color-primary), var(--color-secondary), var(--color-tertiary));
   color: var(--color-white);
-  padding: 5rem 0;
+  padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    padding: 5rem 0;
+  }
 }
 
 .hero-content {
@@ -65,9 +69,9 @@
 }
 
 .hero-content h1 {
-  font-size: 2.5rem;
+  font-size: 1.875rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -78,72 +82,75 @@
 }
 
 .hero-content p {
-  font-size: 1.125rem;
-  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
   opacity: 0.9;
 }
 
+@media (min-width: 768px) {
+  .hero-content p {
+    font-size: 1.25rem;
+  }
+}
+
 .search-container {
-  position: relative;
-  max-width: 600px;
+  display: flex;
+  gap: 0.5rem;
+  max-width: 100%;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .search-container input {
-  width: 100%;
-  padding: 1rem 3rem 1rem 1.5rem;
-  border-radius: var(--border-radius-full);
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-lg);
   border: none;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   color: var(--color-gray-800);
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .search-container input:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.3), var(--shadow-lg);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3), var(--shadow-md);
 }
 
 .search-button {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
   background: linear-gradient(to right, var(--color-secondary), var(--color-tertiary));
   color: var(--color-white);
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: var(--border-radius-full);
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--border-radius-lg);
+  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: var(--shadow-md);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
 }
 
 .search-button:hover {
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-lg);
 }
 
-.search-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+.search-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3), var(--shadow-md);
 }
 
-/* Categories */
 .categories-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
-  margin: 3rem 0 2.5rem;
+  gap: 0.5rem;
+  margin: 2rem 0;
 }
 
 .category-button {
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--border-radius-full);
   font-size: 0.875rem;
   font-weight: 500;
@@ -166,34 +173,39 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Grid Layout */
 .grid-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
   .grid-layout {
+    display: grid;
     grid-template-columns: 2fr 1fr;
+    gap: 2rem;
   }
 }
 
-/* Map Container */
 .map-container {
   border-radius: var(--border-radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-100);
-  height: 500px;
+  height: 400px;
+}
+
+@media (min-width: 768px) {
+  .map-container {
+    height: 500px;
+  }
 }
 
 .map {
   z-index: 0;
 }
 
-/* Popup Styling */
 .custom-popup .popup-content {
   text-align: center;
   padding: 0.75rem;
@@ -238,7 +250,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Freelancers Container */
 .freelancers-container {
   background-color: var(--color-white);
   border-radius: var(--border-radius-xl);
@@ -269,7 +280,6 @@
   border-radius: var(--border-radius-full);
 }
 
-/* Freelancers List */
 .freelancers-list {
   display: flex;
   flex-direction: column;
@@ -353,7 +363,6 @@
   width: 100%;
 }
 
-/* View All Link */
 .view-all-container {
   margin-top: 1.5rem;
   text-align: center;
@@ -373,36 +382,55 @@
   text-decoration-color: var(--color-primary-light);
 }
 
-/* Call to Action */
 .cta-container {
-  margin: 4rem 0;
+  margin: 2rem 0;
   background: linear-gradient(to right, var(--color-primary), var(--color-secondary), var(--color-tertiary));
   border-radius: var(--border-radius-xl);
-  padding: 2.5rem;
+  padding: 2rem;
   text-align: center;
   color: var(--color-white);
   box-shadow: var(--shadow-xl);
 }
 
+@media (min-width: 768px) {
+  .cta-container {
+    margin: 4rem 0;
+    padding: 2.5rem;
+  }
+}
+
 .cta-container h2 {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
+@media (min-width: 768px) {
+  .cta-container h2 {
+    font-size: 1.875rem;
+  }
+}
+
 .cta-container p {
-  font-size: 1.125rem;
-  margin-bottom: 2rem;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
   opacity: 0.9;
   max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
 }
 
+@media (min-width: 768px) {
+  .cta-container p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+}
+
 .create-pin-button {
   background-color: var(--color-white);
   color: var(--color-primary-dark);
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius-lg);
   font-weight: 500;
   border: none;
@@ -417,9 +445,8 @@
   transform: translateY(-2px);
 }
 
-/* Loader */
 .loader-container {
-  height: 24rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -427,12 +454,19 @@
 }
 
 .loader {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   border: 0.25rem solid var(--color-gray-200);
   border-top-color: var(--color-primary);
   animation: spin 1s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .loader {
+    width: 3rem;
+    height: 3rem;
+  }
 }
 
 @keyframes spin {
@@ -441,10 +475,16 @@
   }
 }
 
-/* No Results */
 .no-results {
   text-align: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
   color: var(--color-gray-500);
-  font-size: 1.125rem;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .no-results {
+    padding: 3rem 0;
+    font-size: 1.125rem;
+  }
 }

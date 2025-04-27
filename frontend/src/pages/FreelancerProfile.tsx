@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getFreelancerById } from '../services/api';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
-import Button from '../components/Button';
+import Button from './Button';
 import './FreelancerProfile.css';
 
 interface Freelancer {
@@ -42,10 +42,15 @@ const FreelancerProfile: React.FC = () => {
   }, [id]);
 
   const markerIcon = L.divIcon({
-    html: '<span style="font-size: 24px; color: red;">🔴</span>',
+    html: `
+      <svg width="24" height="36" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 10.667 12 24 12 24s12-13.333 12-24C24 5.373 18.627 0 12 0z" fill="#8b5cf6"/>
+        <circle cx="12" cy="12" r="6" fill="#ffffff"/>
+      </svg>
+    `,
     className: '',
-    iconSize: [24, 24],
-    iconAnchor: [12, 24],
+    iconSize: [24, 36],
+    iconAnchor: [12, 36],
   });
 
   if (loading) {

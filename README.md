@@ -1,4 +1,3 @@
-```markdown
 # GigMap
 
 ![GigMap Home](/assets/projects-screenshots/gigmap/home.png)
@@ -76,26 +75,26 @@ Below are key screenshots showcasing GigMap's features and design:
 ## Tech Stack
 
 ### Frontend
-- **React 19**: Component-based UI with modern hooks for state management.
-- **TypeScript 5.7.2**: Type-safe development for robust code.
-- **React Router 7.5.1**: Seamless client-side routing for navigation.
-- **React-Leaflet 5.0.0**: Interactive maps with OpenStreetMap integration.
-- **Axios 1.8.4**: HTTP requests to the backend API.
-- **Vite 6.3.1**: Fast build tool for development and production.
-- **ESLint 9.22.0**: Code linting with React Hooks and Refresh plugins.
-- **CSS**: Custom styles with gradients (`#2C6E6B`, `#E76F51`, `#E9D8A6`), media queries, and a utility-first approach inspired by Tailwind CSS.
+- **React 19**
+- **TypeScript 5.7.2**
+- **React Router 7.5.1**
+- **React-Leaflet 5.0.0**
+- **Axios 1.8.4**
+- **Vite 6.3.1**
+- **ESLint 9.22.0**
+- **CSS**
 
 ### Backend
-- **Node.js**: Runtime for the server.
-- **Express 4.21.2**: Lightweight framework for API endpoints.
-- **Prisma 4.16.2**: ORM for database management (assumed PostgreSQL based on seeding).
-- **CORS 2.8.5**: Cross-origin resource sharing for frontend-backend communication.
-- **dotenv 16.5.0**: Environment variable management.
-- **ts-node 10.9.2**: TypeScript execution for development.
+- **Node.js**
+- **Express 4.21.2**
+- **Prisma 4.16.2**
+- **CORS 2.8.5**
+- **dotenv 16.5.0**
+- **ts-node 10.9.2**
 
 ### Deployment
-- **Vercel**: Hosting for the frontend with CI/CD pipelines.
-- **GitHub**: Version control and repository management.
+- **Vercel**
+- **GitHub**
 
 ## Project Structure
 
@@ -104,29 +103,10 @@ gigmap/
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Header.tsx
-│   │   │   └── Footer.tsx
 │   │   ├── pages/
-│   │   │   ├── Home.tsx
-│   │   │   ├── Browse.tsx
-│   │   │   ├── About.tsx
-│   │   │   ├── Contact.tsx
-│   │   │   ├── CreatePin.tsx
-│   │   │   ├── FreelancerProfile.tsx
-│   │   │   └── NotFound.tsx
 │   │   ├── services/
-│   │   │   └── api.ts
 │   │   ├── styles/
-│   │   │   ├── Home.css
-│   │   │   ├── Browse.css
-│   │   │   ├── About.css
-│   │   │   ├── Contact.css
-│   │   │   ├── FreelancerProfile.css
-│   │   │   ├── Header.css
-│   │   │   └── global.css
 │   │   ├── assets/
-│   │   │   └── projects-screenshots/gigmap/*.png
 │   │   ├── App.tsx
 │   │   └── main.tsx
 │   ├── package.json
@@ -135,190 +115,87 @@ gigmap/
 │   └── eslint.config.js
 ├── gigmap-backend/
 │   ├── api/
-│   │   └── index.ts
 │   ├── prisma/
-│   │   ├── schema.prisma
-│   │   └── seed.ts
 │   ├── package.json
 │   └── tsconfig.json
-```
 
-## Installation
+Installation
 
-### Prerequisites
-- **Node.js** (>=18.x)
-- **npm** (>=9.x)
-- **PostgreSQL** (or your database of choice, configured in `schema.prisma`)
-- **Git**
+Prerequisites
 
-### Frontend Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/jjingofarouk/gigmap.git
-   cd gigmap/frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
-5. Preview the production build:
-   ```bash
-   npm run preview
-   ```
+	•	Node.js (>=18.x)
+	•	npm (>=9.x)
+	•	PostgreSQL
+	•	Git
 
-### Backend Setup
-1. Navigate to the backend directory:
-   ```bash
-   cd gigmap/gigmap-backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set up environment variables in `.env`:
-   ```plaintext
-   DATABASE_URL="postgresql://user:password@localhost:5432/gigmap?schema=public"
-   PORT=3001
-   ```
-4. Generate Prisma client:
-   ```bash
-   npm run prisma:generate
-   ```
-5. Run database migrations:
-   ```bash
-   npm run prisma:migrate
-   ```
-6. Seed the database:
-   ```bash
-   npm run seed
-   ```
-7. Start the development server:
-   ```bash
-   npm run dev
-   ```
-8. Build and start for production:
-   ```bash
-   npm run build
-   npm start
-   ```
+Frontend Setup
 
-## Usage
+git clone https://github.com/jjingofarouk/gigmap.git
+cd gigmap/frontend
+npm install
+npm run dev
 
-1. **Home Page**: Explore freelancers on an interactive map or browse profiles via the search bar and category filters.
-2. **Browse Page**: View all freelancers with map and list views, filtered by skills or search queries.
-3. **Freelancer Profile**: Access detailed profiles with tabs for About, Portfolio, and Reviews, including contact options.
-4. **Create Pin**: Freelancers can create profiles through a multi-step form, adding details, skills, and geolocation.
-5. **About Page**: Learn about GigMap’s mission, features, and story.
-6. **Contact Page**: Submit inquiries via a form or view contact details.
-7. **Navigation**: Use the responsive header to access all pages, with a mobile menu for smaller screens.
+Backend Setup
 
-## Development Process
+cd gigmap/gigmap-backend
+npm install
+# Setup .env with your database URL
+npm run prisma:generate
+npm run prisma:migrate
+npm run seed
+npm run dev
 
-GigMap was developed using a modern JavaScript ecosystem, emphasizing performance, scalability, and maintainability:
+Usage
 
-- **Frontend**:
-  - **Vite** enabled rapid development with hot module replacement.
-  - **React 19** leveraged hooks (`useState`, `useEffect`) for state management and side effects.
-  - **TypeScript** ensured type safety across components, API responses, and data models.
-  - **React Router** facilitated seamless navigation with dynamic routes (e.g., `/freelancer/:id`).
-  - **React-Leaflet** integrated OpenStreetMap with custom SVG markers, optimized for performance.
-  - **Axios** handled API requests with error handling and retries.
-  - **ESLint** and **TypeScript-ESLint** enforced code quality and consistency.
-  - **CSS** was crafted with a custom framework, using variables (e.g., `--color-primary: #2C6E6B`), gradients, and media queries for responsiveness.
+	•	Explore freelancers on the map
+	•	Browse profiles
+	•	Create your freelance profile
+	•	Contact freelancers
 
-- **Backend**:
-  - **Node.js** and **Express** powered a RESTful API for freelancer data.
-  - **Prisma** simplified database operations with type-safe queries and migrations.
-  - **seed.ts** populated the database with initial freelancer data, including geospatial coordinates.
-  - **CORS** and **dotenv** ensured secure and configurable API access.
-  - **ts-node** enabled TypeScript execution during development.
+Development Process
 
-- **Deployment**:
-  - **Vercel** hosted the frontend with automated CI/CD.
-  - Backend deployed separately (assumed on a platform like Heroku or Render).
-  - **GitHub** managed version control with feature branches and pull requests.
+	•	Vite for fast builds
+	•	React 19 with hooks
+	•	TypeScript for type safety
+	•	Express + Prisma backend
+	•	OpenStreetMap integration
+	•	Full CI/CD with Vercel
 
-## Skills Demonstrated
+Skills Demonstrated
 
-GigMap showcases a comprehensive skill set across frontend, backend, and DevOps:
+	•	React, TypeScript, Node.js, Express, Prisma
+	•	REST APIs
+	•	OpenStreetMap integration
+	•	Progressive Web App (PWA)
+	•	Responsive design
+	•	Accessibility (WCAG standards)
 
-### Frontend
-- **JavaScript (ES6+)**: Functional components, hooks, and modern syntax.
-- **React 19**: Component architecture, state management, and lifecycle methods.
-- **TypeScript**: Interfaces, type guards, and type-safe API integration.
-- **React Router**: Dynamic routing, navigation, and nested routes.
-- **React-Leaflet**: Geospatial mapping with custom markers and popups.
-- **Axios**: Asynchronous API calls with error handling.
-- **CSS**: Custom styling with variables, gradients, animations, and responsive design.
-- **Vite**: Fast build tooling and development server.
-- **ESLint**: Code linting with React-specific rules.
+Challenges and Solutions
 
-### Backend
-- **Node.js**: Server-side JavaScript runtime.
-- **Express**: RESTful API development with middleware.
-- **Prisma**: Database ORM with schema design and migrations.
-- **PostgreSQL**: Relational database management (assumed based on Prisma).
-- **TypeScript**: Type-safe backend logic and API endpoints.
-- **CORS**: Secure cross-origin requests.
-- **dotenv**: Environment variable management.
+	•	Map Responsiveness: Dynamic sizing and container management
+	•	Multi-Step Form State: Hook-based state management with TypeScript interfaces
+	•	Performance Optimization: Debounced search, database indexing
+	•	OSM Compliance: Attribution added properly
+	•	Accessibility: ARIA labels, contrast colors
 
-### DevOps
-- **Vercel**: Frontend deployment with CI/CD.
-- **Git/GitHub**: Version control, branching, and collaboration.
-- **NPM**: Package management and scripting.
+Future Enhancements
 
-### Other
-- **OpenStreetMap**: Geospatial data integration with ODbL compliance.
-- **WCAG**: Accessibility standards for forms, buttons, and navigation.
-- **PWA**: Offline support and mobile optimization.
-- **UI/UX Design**: Gradient-driven, hospital-chic aesthetic with Inter font and subtle shadows.
+	•	Portfolio uploads
+	•	Freelancer review system
+	•	Real-time chat
+	•	Advanced filtering and sorting
+	•	Authentication
+	•	Analytics dashboard
+	•	Map clustering for performance
 
-## Challenges and Solutions
+License
 
-1. **Challenge**: Ensuring responsive map rendering across devices.
-   - **Solution**: Used **React-Leaflet** with dynamic container sizing and media queries in CSS, testing on Chrome DevTools for mobile, tablet, and desktop.
+GigMap is licensed under the MIT License. OpenStreetMap data used under the Open Database License (ODbL).
 
-2. **Challenge**: Managing complex state in the multi-step Create Pin form.
-   - **Solution**: Leveraged **React hooks** (`useState`) with TypeScript interfaces for form data, ensuring smooth transitions and validation.
+Contact
 
-3. **Challenge**: Optimizing API performance for freelancer searches.
-   - **Solution**: Implemented debounced search with **Axios** and indexed database fields in **Prisma** for faster queries.
+	•	Email: jjingofaroukk@gmail.com
+	•	Phone: +256 (751) 360-385
+	•	Website: jjingofarouk.xyz
+	•	GitHub: jjingofarouk
 
-4. **Challenge**: Maintaining OpenStreetMap licensing compliance.
-   - **Solution**: Added proper attribution in map components, linking to `openstreetmap.org/copyright` and `opendatacommons.org`.
-
-5. **Challenge**: Ensuring accessibility for form inputs and navigation.
-   - **Solution**: Added ARIA labels, focus states, and high-contrast colors, validated with WAVE accessibility tool.
-
-## Future Enhancements
-
-- **Portfolio Uploads**: Allow freelancers to upload images and links to their portfolios.
-- **Review System**: Implement a rating and review feature for freelancer profiles.
-- **Real-Time Chat**: Integrate WebSocket-based chat for client-freelancer communication.
-- **Advanced Filters**: Add sorting options (e.g., by rating, experience) and multi-select filters.
-- **Authentication**: Add user login with Firebase Authentication for secure profile management.
-- **Analytics Dashboard**: Provide freelancers with insights on profile views and client interactions.
-- **Map Clustering**: Use Leaflet marker clustering for dense freelancer populations.
-
-## License
-
-GigMap is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details. OpenStreetMap data is used under the **Open Database License (ODbL)**, with proper attribution provided in the application.
-
-## Contact
-
-For inquiries, feedback, or collaboration opportunities, reach out via:
-
-- **Email**: jjingofaroukk@gmail.com
-- **Phone**: +256 (751) 360-385
-- **Website**: [jjingofarouk.xyz](https://jjingofarouk.xyz)
-- **GitHub**: [jjingofarouk](https://github.com/jjingofarouk)
-
-Explore GigMap, review the code, and let’s build the future of freelance networking together!

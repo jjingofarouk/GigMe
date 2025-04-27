@@ -1,5 +1,3 @@
-ea7a-41e6-99b5-2d9702e2f92a" artifact_version_id="2f78d792-2d72-40ec-bda0-4510db03a9ca" title="Home.tsx" contentType="text/typescript">
-
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';

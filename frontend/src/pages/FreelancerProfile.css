@@ -1,12 +1,14 @@
 /* src/components/FreelancerProfile.css */
 :root {
-  --color-primary: #8b5cf6;
-  --color-primary-light: #a78bfa;
-  --color-primary-dark: #7c3aed;
-  --color-secondary: #d946ef;
-  --color-secondary-light: #e879f9;
-  --color-secondary-dark: #c026d3;
-  --color-tertiary: #ec4899;
+  --color-primary: #2C6E6B;
+  --color-primary-light: #4A8E8A;
+  --color-primary-dark: #1F4D4A;
+  --color-secondary: #E76F51;
+  --color-secondary-light: #F4A261;
+  --color-secondary-dark: #C94C32;
+  --color-tertiary: #E9D8A6;
+  --color-tertiary-light: #F3E9D2;
+  --color-tertiary-dark: #D4C291;
   --color-white: #ffffff;
   --color-black: #000000;
   --color-gray-50: #f9fafb;

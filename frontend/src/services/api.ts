@@ -1,7 +1,11 @@
+
+
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const api = axios.create({
-  baseURL: 'https://gigmap-backend.vercel.app',
+  baseURL: API_URL,
 });
 
 export const getFreelancers = async () => {
@@ -26,3 +30,6 @@ export const createFreelancer = async (data: {
   const response = await api.post('/freelancers', data);
   return response.data;
 };
+
+
+The backend url I have for vercel is gigmap-backend.vercel.app

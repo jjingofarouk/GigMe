@@ -55,13 +55,13 @@ const Footer: React.FC = () => {
             <h3>Contact</h3>
             <ul className="footer__contact-links">
               <li>
-                <a href="mailto:support@gigmap.com" className="footer__contact-link">
+                <a href="mailto:jjingofaroukk@gmail.com" className="footer__contact-link">
                   support@gigmap.com
                 </a>
               </li>
               <li>
-                <a href="tel:+15551234567" className="footer__contact-link">
-                  +1 (555) 123-4567
+                <a href="tel:+256751360385" className="footer__contact-link">
+                  +256 751 360 385
                 </a>
               </li>
             </ul>

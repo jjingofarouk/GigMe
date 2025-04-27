@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createFreelancer } from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import Button from './Button';
+import Button from './Button'; // Default import is correct
 
 const PinForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -50,9 +50,7 @@ const PinForm: React.FC = () => {
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Best Things (3)
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Best Things (3)</label>
         {formData.bestThings.map((thing, index) => (
           <input
             key={index}
@@ -69,9 +67,7 @@ const PinForm: React.FC = () => {
         ))}
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Location
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Location</label>
         <input
           type="text"
           value={formData.location}
@@ -81,9 +77,7 @@ const PinForm: React.FC = () => {
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Contact
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Contact</label>
         <input
           type="text"
           value={formData.contact}
@@ -94,9 +88,7 @@ const PinForm: React.FC = () => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Latitude
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Latitude</label>
           <input
             type="number"
             value={formData.latitude}
@@ -108,9 +100,7 @@ const PinForm: React.FC = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Longitude
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Longitude</label>
           <input
             type="number"
             value={formData.longitude}

@@ -1,12 +1,11 @@
-// Map.tsx
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
 import { getFreelancers } from '../services/api';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
+import './Map.css';
 
-// Define Freelancer type based on backend schema
 interface Freelancer {
   id: string;
   name: string;
@@ -27,7 +26,7 @@ interface MapProps {
   markers?: Freelancer[];
 }
 
-const Map: React.FC<MapProps> = ({ 
+const Map: React.FC<MapProps> = ({
   height = '500px',
   showControls = true,
   initialCenter = [20, 0],
@@ -38,14 +37,12 @@ const Map: React.FC<MapProps> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // If markers are provided as props, use them
     if (markers) {
       setFreelancers(markers);
       setLoading(false);
       return;
     }
 
-    // Otherwise fetch from API
     const fetchFreelancers = async () => {
       try {
         const data = await getFreelancers();
@@ -60,32 +57,33 @@ const Map: React.FC<MapProps> = ({
     fetchFreelancers();
   }, [markers]);
 
-  const markerIcon = new L.Icon({
-    iconUrl: '/map-marker.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
+  const markerIcon = new L.DivIcon({
+    className: 'map__marker',
+    html: '<span class="map__marker-dot">🔴</span>',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -10],
   });
 
   if (loading) {
     return (
-      <div className={`bg-gray-100 rounded-lg flex items-center justify-center`} style={{ height }}>
-        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600"></div>
+      <div className="map__loading" style={{ height }}>
+        <div className="map__loading-spinner"></div>
       </div>
     );
   }
 
   return (
-    <MapContainer 
-      center={initialCenter} 
-      zoom={initialZoom} 
+    <MapContainer
+      center={initialCenter}
+      zoom={initialZoom}
       style={{ height, width: '100%' }}
-      zoomControl={false} // We'll add our own zoom control in a custom position
-      className="rounded-lg shadow-md z-0"
+      zoomControl={false}
+      className="map__container"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, licensed under <a href="https://www.opendatacommons.org/licenses/odbl/">ODbL</a>'
       />
       
       {showControls && <ZoomControl position="bottomright" />}
@@ -96,15 +94,12 @@ const Map: React.FC<MapProps> = ({
           position={[freelancer.latitude, freelancer.longitude]}
           icon={markerIcon}
         >
-          <Popup className="custom-popup">
-            <div className="text-center p-1">
-              <h3 className="font-bold text-gray-900 mb-1">{freelancer.name}</h3>
-              <p className="text-sm text-gray-500 mb-2">{freelancer.location}</p>
-              <p className="text-sm text-gray-700 mb-3 line-clamp-2">{freelancer.blurb}</p>
-              <Link 
-                to={`/freelancer/${freelancer.id}`}
-                className="inline-block bg-indigo-600 text-white px-4 py-1 rounded text-sm hover:bg-indigo-700 transition-colors"
-              >
+          <Popup className="map__popup">
+            <div className="map__popup-content">
+              <h3 className="map__popup-title">{freelancer.name}</h3>
+              <p className="map__popup-location">{freelancer.location}</p>
+              <p className="map__popup-blurb">{freelancer.blurb}</p>
+              <Link to={`/freelancer/${freelancer.id}`} className="map__popup-link">
                 View Profile
               </Link>
             </div>

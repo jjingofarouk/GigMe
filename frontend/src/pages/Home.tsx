@@ -1,11 +1,12 @@
-// src/components/Home.tsx
+ea7a-41e6-99b5-2d9702e2f92a" artifact_version_id="2f78d792-2d72-40ec-bda0-4510db03a9ca" title="Home.tsx" contentType="text/typescript">
+
 import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getFreelancers } from '../services/api';
 import L from 'leaflet';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
+import Button from './Button';
 import './Home.css';
 
 interface Freelancer {
@@ -58,16 +59,24 @@ const Home: React.FC = () => {
   });
 
   const markerIcon = L.divIcon({
-    html: '<span style="font-size: 24px; color: red;">🔴</span>',
+    html: `
+      <svg width="24" height="36" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 10.667 12 24 12 24s12-13.333 12-24C24 5.373 18.627 0 12 0z" fill="#8b5cf6"/>
+        <circle cx="12" cy="12" r="6" fill="#ffffff"/>
+      </svg>
+    `,
     className: '',
-    iconSize: [24, 24],
-    iconAnchor: [12, 24],
+    iconSize: [24, 36],
+    iconAnchor: [12, 36],
   });
+
+  const handleSearch = () => {
+    console.log('Search triggered with query:', searchQuery);
+  };
 
   return (
     <div className="app-container">
       <main className="main-content">
-        {/* Hero Section */}
         <div className="hero-section">
           <div className="container">
             <div className="hero-content">
@@ -79,29 +88,16 @@ const Home: React.FC = () => {
                   placeholder="Search by name, skill, or location..."
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
+                  aria-label="Search freelancers"
                 />
-                <button className="search-button">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="search-icon"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                <button className="search-button" onClick={handleSearch} aria-label="Search">
+                  Search
                 </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Categories */}
         <div className="container">
           <div className="categories-container">
             <button
@@ -121,9 +117,7 @@ const Home: React.FC = () => {
             ))}
           </div>
 
-          {/* Map and Freelancers Section */}
           <div className="grid-layout">
-            {/* Map */}
             <div className="map-container">
               {loading ? (
                 <div className="loader-container">
@@ -157,7 +151,6 @@ const Home: React.FC = () => {
               )}
             </div>
 
-            {/* Freelancers List */}
             <div className="freelancers-container">
               <div className="freelancers-header">
                 <h2>Freelancers</h2>
@@ -202,7 +195,6 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Call to Action */}
           <div className="cta-container">
             <h2>Are you a freelancer?</h2>
             <p>Join our platform and let clients find you. Create your freelancer pin today!</p>

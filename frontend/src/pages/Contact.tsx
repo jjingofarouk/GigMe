@@ -1,6 +1,6 @@
 // src/pages/Contact.tsx
 import { useState, FormEvent } from 'react';
-import '../styles/Contact.css';
+import './Contact.css';
 
 const Contact: React.FC = () => {
   const [name, setName] = useState('');

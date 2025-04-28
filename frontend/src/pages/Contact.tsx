@@ -1,21 +1,9 @@
 // src/pages/Contact.tsx
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
 import './Contact.css';
 
 const Contact: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // Placeholder for form submission logic
-    setSubmitted(true);
-    setName('');
-    setEmail('');
-    setMessage('');
-  };
 
   return (
     <div className="contact-container">
@@ -40,14 +28,18 @@ const Contact: React.FC = () => {
               </button>
             </div>
           ) : (
-            <form className="contact-form" onSubmit={handleSubmit}>
+            <form
+              className="contact-form"
+              action="https://formspree.io/f/mkgrglkw" 
+              method="POST"
+              onSubmit={() => setSubmitted(true)}
+            >
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   id="name"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
+                  name="name"
                   required
                   aria-label="Your name"
                 />
@@ -57,8 +49,7 @@ const Contact: React.FC = () => {
                 <input
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  name="email"
                   required
                   aria-label="Your email"
                 />
@@ -67,8 +58,7 @@ const Contact: React.FC = () => {
                 <label htmlFor="message">Message</label>
                 <textarea
                   id="message"
-                  value={message}
-                  onChange={e => setMessage(e.target.value)}
+                  name="message"
                   required
                   aria-label="Your message"
                 />
